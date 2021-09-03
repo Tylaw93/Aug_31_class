@@ -13,10 +13,19 @@ export default {
   show(id) {
     return client.db("noteTaker").collection("notes").findOne(ObjectId(id));
   },
+  update(id, updatedNote) {
+    return client
+      .db("noteTaker")
+      .collection("notes")
+      .updateOne({ _id: ObjectId(id) }, { $set: updatedNote });
+  },
   delete(id) {
     return client
       .db("noteTaker")
       .collection("notes")
       .deleteOne({ _id: ObjectId(id) });
+  },
+  deleteAll() {
+    return client.db("noteTaker").collection("notes").deleteMany({});
   },
 };
